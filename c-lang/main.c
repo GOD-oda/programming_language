@@ -1,7 +1,10 @@
 #include <stdio.h>
 
+int plus(int x, int y) {
+  return x + y;
+}
+
 int main()
 {
-  puts("hello world");
-  return 0;
+  return plus(4, 2);
 }
