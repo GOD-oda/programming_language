@@ -7,6 +7,5 @@
 ```shell
 % make run
 
-root@865882af455e:/var/www/html# rustc main.rs
-root@865882af455e:/var/www/html# ./main
+root@865882af455e:/var/www/html# cargo run
 ```
