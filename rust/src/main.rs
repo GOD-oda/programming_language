@@ -179,6 +179,100 @@ fn ch_21() {
     println!("{} is {} characters long", s, s.len());
 }
 
+fn ch_26() {
+    struct SeaCreature {
+        animal_type: String,
+        name: String,
+        arms: i32,
+        legs: i32,
+        weapon: String
+    }
+
+    let ferris = SeaCreature {
+        animal_type: String::from("crab"),
+        name: String::from("ferris"),
+        arms: 2,
+        legs: 4,
+        weapon: String::from("claw")
+    };
+
+    println!("animal_type: {}, name: {}, arms: {}, legs: {}, weapon: {}", ferris.animal_type, ferris.name, ferris.arms, ferris.legs, ferris.weapon);
+}
+
+fn ch_27() {
+    struct Location(i32, i32);
+
+    let loc = Location(1, 2);
+    println!("{}, {}", loc.0, loc.1);
+}
+
+fn ch_29() {
+    #![allow(dead_code)]
+    enum Species {
+        Crab,
+        Octopus,
+        Fish,
+        Clam
+    }
+
+    struct SeaCreature {
+        species: Species,
+        name: String
+    }
+
+    let ferris = SeaCreature {
+        species: Species::Crab,
+        name: String::from("ferris")
+    };
+
+    match ferris.species {
+        Species::Crab => println!("crab"),
+        Species::Octopus => println!("octopus"),
+        Species::Fish => println!("fish"),
+        Species::Clam => println!("clam")
+    }
+}
+
+fn ch_30() {
+    #![allow(dead_code)]
+
+    enum Species { Crab, Octopus }
+    enum PoisonType { Acidic, Painful }
+    enum Size { Big, Small }
+    enum Weapon {
+        Claw(i32, Size),
+        Poison(PoisonType)
+    }
+
+    struct SeaCreature {
+        species: Species,
+        name: String,
+        weapon: Weapon
+    }
+
+    let ferris = SeaCreature {
+        species: Species::Crab,
+        name: String::from("ferris"),
+        weapon: Weapon::Claw(1, Size::Big)
+    };
+
+    match ferris.species {
+        Species::Crab => {
+            match ferris.weapon {
+                Weapon::Claw(num_claws, size) => {
+                    let size_dest = match size {
+                        Size::Big => "big",
+                        Size::Small => "small"
+                    };
+                    println!("num: {}, size: {}", num_claws, size_dest)
+                },
+                _ => println!("other weapon")
+            }
+        }
+        _ => println!("other species")
+    }
+}
+
 fn main() {
     println!("- ch_3 -");
     ch_3();
@@ -230,4 +324,16 @@ fn main() {
 
     println!("- ch_21 -");
     ch_21();
+
+    println!("- ch_26 -");
+    ch_26();
+
+    println!("- ch_27 -");
+    ch_27();
+
+    println!("- ch_29 -");
+    ch_29();
+
+    println!("- ch_30 -");
+    ch_30();
 }
