@@ -273,6 +273,112 @@ fn ch_30() {
     }
 }
 
+fn ch_33() {
+    struct BagOfHolding<T> {
+        item: T
+    }
+
+    let i32_bag = BagOfHolding::<i32> { item: 32 };
+    let bool_bag = BagOfHolding::<bool> { item: true };
+    let float_bag = BagOfHolding { item: 3.14 };
+    let bag_in_bag = BagOfHolding {
+        item: BagOfHolding { item: "boom!" }
+    };
+
+    println!("{} {} {} {}", i32_bag.item, bool_bag.item, float_bag.item, bag_in_bag.item.item);
+}
+
+fn ch_35() {
+    struct BagOfHolding<T> {
+        item: Option<T>
+    }
+
+    let i32_bag = BagOfHolding::<i32> { item: None };
+    if i32_bag.item.is_none() {
+        println!("none");
+    } else {
+        println!("not none")
+    }
+
+    let i32_bag = BagOfHolding::<i32> { item: Some(32) };
+    if i32_bag.item.is_some() {
+        println!("some");
+    } else {
+        println!("not some");
+    }
+
+    match i32_bag.item {
+        Some(v) => println!("{}", v),
+        None => println!("nothing")
+    }
+}
+
+fn ch_36() {
+    let result = do_something_that_ok();
+
+    match result {
+        Ok(v) => println!("ok: {}", v),
+        Err(e) => println!("err: {}", e)
+    }
+}
+
+fn do_something_that_ok() -> Result<f32, String> {
+    Ok(13.0)
+}
+
+fn ch_38() -> Result<(), String> {
+    let result = do_something_that_fail()?;
+    println!("{}", result);
+    Ok(())
+}
+
+fn do_something_that_fail() -> Result<f32, String> {
+    Err(String::from("invalid num"))
+}
+
+fn ch_39() -> Result<(), String> {
+    let v = do_something_that_fail().unwrap();
+    println!("{}", v);
+
+    Ok(())
+}
+
+fn ch_40() {
+    let mut i32_vec = Vec::<i32>::new();
+    i32_vec.push(1);
+    i32_vec.push(2);
+    i32_vec.push(3);
+    for i in i32_vec.iter() {
+        println!("{}", i);
+    }
+
+    let mut f32_vec = Vec::new();
+    f32_vec.push(1.2);
+    f32_vec.push(2.3);
+    f32_vec.push(3.4);
+    for f in f32_vec.iter() {
+        println!("{}", f);
+    }
+
+    let str_vec = vec![
+        String::from("hello"),
+        String::from("world")
+    ];
+    for word in str_vec.iter() {
+        println!("{}", word);
+    }
+}
+
+fn ch_50() {
+    let mut foo = 42;
+    let f = &mut foo;
+    let bar = *f;
+    *f = 32;
+
+    println!("{}", bar);
+    println!("{}", foo);
+}
+
 fn main() {
     println!("- ch_3 -");
     ch_3();
@@ -336,4 +442,26 @@ fn main() {
 
     println!("- ch_30 -");
     ch_30();
+
+    println!("- ch_33 -");
+    ch_33();
+
+    println!("- ch_35 -");
+    ch_35();
+
+    println!("- ch_36 -");
+    ch_36();
+
+    println!("- ch_38 -");
+    ch_38();
+
+    // unwrap()のサンプル
+    // println!("- ch_39 -");
+    // ch_39();
+
+    println!("- ch_40 -");
+    ch_40();
+
+    println!("- ch_50 -");
+    ch_50();
 }
