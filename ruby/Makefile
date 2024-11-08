@@ -5,3 +5,7 @@ build:
 .PHONY: run
 run:
 	docker run -it -v $(PWD):/var/www/html programming_language/ruby ruby /var/www/html/index.rb
+
+.PHONY: bash
+bash:
+	docker run -it -w /var/www/html -v $(PWD):/var/www/html programming_language/ruby bash
